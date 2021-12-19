@@ -1,93 +1,217 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Predicting Item Sales</title>
-    <link rel="stylesheet" href="styles.css">
+<html>
+  <head>
+    <title>Predicting Sales Item</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-
-<body bgcolor="Lightskyblue">
-    <div class='container'>
-        <form id = 'myForm'>
-            <div>
-                <label id='weight'> Item Weight </label>
-                <input type="text" name="item_weight" size="15"/> <br> <br>
-            </div>
-
-            <div>
-                <label id='visibility'> Item Visibility </label>
-                <input type="text" name="item_visibility" size="15"/> <br> <br>
-            </div>
-
-            <div>
-                <label id='item-mrp'> Item MRP </label>
-                <input type="text" name="item_mrp" size="15"/> <br> <br>
-            </div>
-
-            <div class='dropdown-content'>
-                <label> Fat content </label>
-                <select id='fat-content'>
-                    <option value="low fat">Low Fat</option>
-                    <option value="reguler">Reguler</option>
-                </select> <br><br>
-            </div>
-
-            <div class='dropdown-content'>
-                <label> Item Type </label>
-                <select id='item-type'>
-                    <option value="baking goods">Baking Goods</option>
-                    <option value="breads">Breads</option>
-                    <option value="breakfast">Breakfast</option>
-                    <option value="canned">Canned</option>
-                    <option value="dairy">Dairy</option>
-                    <option value="frozen foods">Frozen Foods</option>
-                    <option value="fruits and vegetables">Fruits & Vegetables</option>
-                    <option value="hard drinks">Hard Drinks</option>
-                    <option value="health and hygiene">Health & Hygiene</option>
-                    <option value="household">Household</option>
-                    <option value="meat">Meat</option>
-                    <option value="others">Others</option>
-                    <option value="seafood">Seafood</option>
-                    <option value="snack foods">Snack Foods</option>
-                    <option value="soft drinks">Soft Drinks</option>
-                    <option value="strachy foods">Strachy Foods</option>
-                </select> <br><br>
-            </div>
-    
-            <div class='dropdown-content'>
-                <label> Outlet Size </label>   
-                <select id='outlet-size'>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="small">Small</option>
-                    <option value="unknown">Unknown</option>
-                </select> <br><br>
-            </div>
-
-            <div class='dropdown-content'>
-                <label> Outlet Location </label>
-                <select id='outlet-location'>
-                    <option value="tier 1">Tier 1</option>
-                    <option value="tier 2">Tier 2</option>
-                    <option value="tier 3">Tier 3</option>
-                </select> <br><br>
-            </div>
-            
-            <div class='dropdown-content'>
-                <label> Outlet Type </label>
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, textarea, p { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      h1 {
+      position: absolute;
+      margin: 0;
+      line-height: 42px;
+      font-size: 42px;
+      color: #fff;
+      z-index: 2;
+      }
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 20px;
+      }
+      form {
+      width: 60%;
+      padding: 20px;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 0 25px 0 #d6e0f5; 
+      }
+      .banner {
+      position: relative;
+      height: 300px;
+      background-image: url("back3.webp");  
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      }
+      .banner::after {
+      content: "";
+      background-color: rgba(0, 0, 0, 0.3); 
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      }
+      input, select, textarea {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      }
+      input[type="date"] {
+      padding: 4px 5px;
+      }
+      select {
+      width: 100%;
+      padding: 7px 0;
+      background: transparent;
+      }
+      textarea {
+      width: calc(100% - 12px);
+      padding: 5px;
+      }
+          .item input:hover, .item select:hover, .item textarea:hover {
+      border: 1px solid transparent;
+      box-shadow: 0 0 6px 0 #d6e0f5;
+      color: #d6e0f5;
+      }
+      .item {
+      position: relative;
+      margin: 10px 0;
+      }
+      input[type="date"]::-webkit-inner-spin-button {
+      display: none;
+      }
+      .item i, input[type="date"]::-webkit-calendar-picker-indicator {
+      position: absolute;
+      font-size: 20px;
+      color: #a9a9a9;
+      }
+      .item i {
+      right: 2%;
+      top: 28px;
+      z-index: 1;
+      }
+      [type="date"]::-webkit-calendar-picker-indicator {
+      right: 1%;
+      z-index: 2;
+      opacity: 0;
+      cursor: pointer;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px; 
+      background: #0087cc;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background: #6eb8dd;
+      }
+      @media (min-width: 568px) {
+      .name-item, .city-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+          }
+    </style>
+  </head>
+  <body>
+    <div class="testbox">
+      <form id = 'myForm'>
+        <div class="banner">
+          <h1>Predicting Sales Item</h1>
+        </div>
+        <div class="item">
+          <p>Item Weight</p>
+          <div class="name-item">
+            <input type="text" name="item_weight" placeholder="9.30" />
+          </div>
+        </div>
+        <div class="item">
+          <p>Item Visibility</p>
+          <input type="text" name="item_visibility" placeholder="0.016"/>
+        </div>
+        <div class="item">
+          <p>Item MRP</p>
+          <input type="text" name="item_mrp" placeholder="259.998"/>
+        </div>
+        <div class="item">
+            <p> Fat content </p>
+            <select id='fat-content'>
+                <option value="low fat">Low Fat</option>
+                <option value="reguler">Reguler</option>
+            </select>
+        </div>
+        <div class="item">
+            <p> Item Type </p>
+            <select id='item-type'>
+                <option value="baking goods">Baking Goods</option>
+                <option value="breads">Breads</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="canned">Canned</option>
+                <option value="dairy">Dairy</option>
+                <option value="frozen foods">Frozen Foods</option>
+                <option value="fruits and vegetables">Fruits & Vegetables</option>
+                <option value="hard drinks">Hard Drinks</option>
+                <option value="health and hygiene">Health & Hygiene</option>
+                <option value="household">Household</option>
+                <option value="meat">Meat</option>
+                <option value="others">Others</option>
+                <option value="seafood">Seafood</option>
+                <option value="snack foods">Snack Foods</option>
+                <option value="soft drinks">Soft Drinks</option>
+                <option value="strachy foods">Strachy Foods</option>
+            </select>
+        </div>
+        <div class="item">
+            <p> Outlet Size </p>   
+            <select id='outlet-size'>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="small">Small</option>
+                <option value="unknown">Unknown</option>
+            </select>
+        </div>
+         <div class="item">
+            <p> Outlet Location </p>
+            <select id='outlet-location'>
+                <option value="tier 1">Tier 1</option>
+                <option value="tier 2">Tier 2</option>
+                <option value="tier 3">Tier 3</option>
+            </select>
+        </div>
+        <div class="item">
+            <p> Outlet Type </p>
                 <select id='outlet-type'>
                     <option value="grocery store">Grocery Store</option>
                     <option value="supermarket type 1">Supermarket Type 1</option>
                     <option value="supermarket type 2">Supermarket Type 2</option>
                     <option value="supermarket type 3">Supermarket Type 3</option>
-                </select> <br><br>
-            </div>
-
-            <button type="submit" class="submitbtn" id='submit'>Submit</button>  
-        </form>
+                </select>
+        </div>
+         <div class="btn-block">
+          <button type="submit" id = 'submit'>Send</button>
+        </div>
+      </form>
     </div>
-</body>
-<script>
+  </body>
+  <script>
     function submitHandle(e){
         e.preventDefault()
         val = {
