@@ -1,7 +1,21 @@
 # Tubes_SIL
 
-## Form Tamplate
-https://www.w3docs.com/learn-html/html-form-templates.html
+##File Stack
+### backend
+Untuk menyimpan file - file yang menangani model learningnya dan melakukan prediksi pada tingkat penjualan suatu produk
+```
+app.py : runner dari flask app
+predict.py : controller API predict
+env : folder env untuk deployment API
+```
+### frontend
+Untuk menghasilkan tampilan website
+```
+index.html : kode program html
+back3.webp : file gambar untuk background
+tamplate form : https://www.w3docs.com/learn-html/html-form-templates.html
+```
+
 ## API Documentation
 ```
 https://heroku-sil.herokuapp.com/predict
