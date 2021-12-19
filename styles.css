@@ -1,0 +1,63 @@
+body{  
+    font-family: Calibri, Helvetica, sans-serif;  
+}
+
+.container {  
+    padding: 50px;  
+    background-color: lightblue;  
+}  
+
+input[type=text]{
+    width: 200px;
+}
+
+form{
+    text-align: center;
+}
+
+select{
+    width: 150px;
+}
+
+#weight{
+    padding: 14px;
+}
+
+#visibility{
+    padding: 10px;
+}
+
+#item-mrp{
+    padding: 22px;
+}
+
+.fat-content{
+    margin-left: 45px;
+}
+
+.item-type{
+    margin-left: 55px;
+}
+
+.outlet-size{
+    margin-left: 50px;
+}
+
+.outlet-location{
+    margin-left: 20px;
+}
+
+.outlet-type{
+    margin-left: 45px;
+}
+
+.submitbtn{
+    background-color: #0775be;  
+    color: white;  
+    padding: 16px 20px;  
+    margin: 8px 0;  
+    border: none;  
+    cursor: pointer;  
+    width: 60%;  
+    opacity: 0.9;  
+}
