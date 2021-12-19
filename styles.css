@@ -31,23 +31,23 @@ select{
     padding: 22px;
 }
 
-.fat-content{
+#fat-content{
     margin-left: 45px;
 }
 
-.item-type{
+#item-type{
     margin-left: 55px;
 }
 
-.outlet-size{
+#outlet-size{
     margin-left: 50px;
 }
 
-.outlet-location{
+#outlet-location{
     margin-left: 20px;
 }
 
-.outlet-type{
+#outlet-type{
     margin-left: 45px;
 }
 
